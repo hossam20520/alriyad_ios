@@ -1,0 +1,7 @@
+{
+  "name": "ds1csre-riyadh",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

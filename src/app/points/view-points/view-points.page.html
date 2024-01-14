@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" routerDirection="backward"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'P_TITLES.points' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- points -->
+  <div class="points-line d-flex ion-margin-top" routerLink="/points">
+    <div class="side s1 d-flex">
+        <img src="assets/coin.svg" alt="points">
+        <div class="t ion-text-uppercase"><span>{{ 'POINTS.point' | translate }}</span></div>
+    </div>
+    <div class="side s2 d-flex f-a-c">
+      <div class="co d-flex">
+        <span class="num" *ngIf="totalPoints">{{totalPoints.s}}</span>
+       
+      </div>
+    </div>
+  </div>
+
+
+  <div class="msg-to-i ion-text-center ion-margin-vertical ion-padding-vertical">
+    {{ 'POINTS.msgToInv' | translate }}
+  </div>
+  <div class="prm-actions">
+    <a routerLink="/points/friend-info" class="row-w-gr ion-text-center"> <ion-icon class="icon d-block" src="assets/icon/contact.svg"></ion-icon> {{ 'POINTS.regFrInfo' | translate }}</a>
+    <a routerLink="/points/add-friends" class="row-w-gr ion-text-center"> <ion-icon class="icon d-block" src="assets/icon/phone-book.svg"></ion-icon> {{ 'POINTS.selectFContact' | translate }}</a>
+  </div>
+
+
+  <div class="more-actions">
+    <ul class="list-s">
+      
+      <li routerLink="/points/already-added">{{ 'POINTS.fAdded' | translate }}</li>
+      <li (click)="pushToNextScreenWithParams('/new-post/ds1_tickets', 'redeem')">{{ 'POINTS.redeem' | translate }}</li>
+      <li [routerLink]="'/dynamic/'+this.GeneralService.cuVars.pointsTermsPid">{{ 'POINTS.terms' | translate }}</li>
+    </ul>
+  </div>
+</ion-content>

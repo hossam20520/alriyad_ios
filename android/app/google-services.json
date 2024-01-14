@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "826437599931",
+    "project_id": "al-riyadh-misr-e8d2d",
+    "storage_bucket": "al-riyadh-misr-e8d2d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826437599931:android:3c802672c7473978269f9e",
+        "android_client_info": {
+          "package_name": "eg.com.alriyadhmisr.ds1csre"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826437599931-q4ct6f8mf9k6vj24ds1nac7bqb5rjpgh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJo9LrZ4oc7oFNSgiXQPX2y6kMVyauXc8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "826437599931-q4ct6f8mf9k6vj24ds1nac7bqb5rjpgh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

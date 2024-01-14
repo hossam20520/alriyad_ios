@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" routerDirection="backward"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'P_TITLES.media' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="skeleton">
+    <div class="co g1">
+      <ion-card *ngFor="let number of skeletonNumbers">
+        <ion-skeleton-text animated style="width: 100%;height: 80px;margin: 0;"></ion-skeleton-text>
+        <ion-card-header>
+          <ion-skeleton-text animated></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </ion-card-header>
+      </ion-card>
+    </div>
+  </div>
+  <div *ngIf="videoList && videoList.length > 0" class="vdx g1">
+    <ion-card *ngFor="let vvv of videoList" (click)="openVideo(vvv.id)">
+      <ion-card-content>
+        <img [src]="'https://img.youtube.com/vi/'+ vvv.id +'/mqdefault.jpg'" class="p">
+      </ion-card-content>
+    
+      <ion-card-header>
+        <ion-card-title *ngIf="vvv.title" text-center>{{ vvv.title }}</ion-card-title>
+        <ion-button expand="full" fill="clear" size="small" text-right>{{ 'GENERAL.play_video' | translate }}</ion-button>
+      </ion-card-header>
+
+    </ion-card>
+  </div>
+
+
+
+
+  
+
+</ion-content>

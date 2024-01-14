@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login" routerDirection="backward"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'P_TITLES.forgot' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="iconx-co ion-text-center ion-padding ion-margin-bottom">
+    <ion-icon src="assets/icon/forgot.svg"></ion-icon>
+  </div>
+
+  <form class="step1" *ngIf="formStep == 1" [formGroup]="credentialsForm" (ngSubmit)="onSubmitUserData('step1')">
+    <ion-item class="ion-margin-bottom ion-no-padding">
+      <div tabindex="0"></div>
+      <ion-icon color="primary" name="person-outline"></ion-icon>
+      <ion-input name="username" type="text" formControlName="username" placeholder="{{ 'LOGIN.username' | translate }}"></ion-input>      
+    </ion-item>
+    <div class="ion-text-center">
+      <ion-button type="submit" [disabled]="!credentialsForm.valid">
+        {{ 'GENERAL.send' | translate }}
+      </ion-button>
+    </div>
+
+    <p (click)="toggleFormHaveCode()" class="ion-text-center">{{ 'LOGIN.haveCode' | translate }}</p>
+  </form>
+
+
+  <form class="step2" *ngIf="formStep == 2 || formStep == 21" [formGroup]="credentialsForm_2" (ngSubmit)="onSubmitUserData('step2')">
+    <ion-item class="ion-margin-bottom ion-no-padding">
+      <div tabindex="0"></div>
+      <ion-icon color="primary" name="person-outline"></ion-icon>
+      <ion-input [ngModel]="username" type="text" formControlName="username" placeholder="{{ 'LOGIN.username' | translate }}"></ion-input>      
+    </ion-item>
+    <ion-item class="ion-margin-bottom ion-no-padding">
+      <div tabindex="0"></div>
+      <ion-icon color="primary" name="barcode-outline"></ion-icon>
+      <ion-input type="text" name="active_code" formControlName="active_code" autocomplete="off" placeholder="{{ 'LOGIN.code' | translate }}"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-margin-bottom ion-no-padding">
+      <div tabindex="0"></div>
+      <ion-icon color="primary" name="lock-closed-outline"></ion-icon>
+      <ion-input [type]="password_type" name="new-password" formControlName="password" autocomplete="new-password" placeholder="{{ 'LOGIN.password' | translate }}"></ion-input>
+      <ion-icon name="eye" item-right (click)="togglePasswordMode()"></ion-icon> 
+      
+    </ion-item>
+
+    <div class="ion-text-center">
+      <ion-button type="submit" [disabled]="!credentialsForm_2.valid">
+        {{ 'GENERAL.change' | translate }}
+      </ion-button>
+    </div>
+  </form>
+
+</ion-content>

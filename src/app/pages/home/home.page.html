@@ -1,0 +1,193 @@
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="header-x">
+    <div class="menu-line d-flex ion-padding">
+      <div class="side s1"><img src="assets/logo.png" alt="Logo" class="logo"></div>
+      <div class="side s2 d-flex f-a-c">
+        <ion-menu-button class="prm-menu"></ion-menu-button>
+      </div>
+    </div>
+    <div class="welcome ion-padding ion-text-center">
+      <h1 class="wel" style="color: white;">{{ 'HOME.welcome' | translate }} {{this.GeneralService.cuVars.cUser.value.displayName}}</h1>
+      <span class="msg"  style="color: white;"><b>{{ 'HOME.welcome_msg' | translate }}</b></span>
+    </div>
+    <div *ngIf="prmImage" class="prm-image"></div>
+  </div>
+
+  <div class="page-body ion-padding-horizontal">
+
+    <!-- points -->
+    <div class="points-line d-flex" *ngIf="skip">
+      <div class="side s1 d-flex" routerLink="/points">
+          <img src="assets/coin.svg" alt="points">
+          <div class="t ion-text-uppercase"><span>{{ 'POINTS.point' | translate }}</span></div>
+      </div>
+      <div class="side s2 d-flex f-a-c" routerLink="/points">
+        <span class="num" *ngIf="totalPoints">{{totalPoints.p}}<i class="pfx" *ngIf="totalPoints.pfx">{{ 'POINTS.'+totalPoints.pfx | translate }}</i></span>
+        
+      </div>
+      <div class="side s3 d-flex f-a-c f-j-c">
+        <a routerLink="/points" class="add_friend">{{ 'POINTS.add_friend' | translate }}</a>
+        <a routerLink="/dynamic/{{this.GeneralService.cuVars.pointsTermsPid}}" class="more">{{ 'POINTS.cond' | translate }}</a>
+      </div>
+    </div>
+
+
+    <!-- My project -->
+    <div class="cs-project" *ngIf="userlogin && skip && projectImage != 'empty'">
+      <div class="image-co">
+        <ion-skeleton-text *ngIf="!projectImage" animated style="width:100%;height:210px;margin:auto;border-radius:10px;"></ion-skeleton-text>
+        <img *ngIf="projectImage"  routerLink="/cs-re/follow-up-projects" src="{{ projectImage }}">
+      </div>
+      <div class="info-co ion-text-center">
+        <div class="uu u1" routerLink="/cs-re/financial-gate">
+          <div class="t"><b>{{ 'FINANCIAL.next_installment' | translate }}</b></div>
+
+          <ion-skeleton-text *ngIf="skeleton" animated class="t d-block"></ion-skeleton-text>
+          <div class="v" *ngIf="nextPayment">{{nextPayment.d}} / {{ 'GENERAL.'+nextPayment.mo | translate }}</div>
+
+          <ion-icon class="bg-icon" src="assets/icon/calendar.svg"></ion-icon>
+          <ion-icon class="arr-icon" name="arrow-back-circle-outline"></ion-icon>
+
+        </div>
+        <div class="uu u2" routerLink="/cs-re/follow-up-projects">
+          <div class="t"><b>{{ 'HOME.follow_projects' | translate }}</b></div>
+          <div class="v">{{ 'GENERAL.more' | translate }}</div>
+
+          <ion-icon class="bg-icon" src="assets/icon/building.svg"></ion-icon>
+          <ion-icon class="arr-icon" name="arrow-back-circle-outline"></ion-icon>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="skeleton" *ngIf="skeleton">
+      <div class="services ion-margin-bottom">
+        <div class="head customx d-flex f-a-c ion-margin-bottom">
+          <h2 class="title">{{ 'HOME.services' | translate }}</h2>
+          <a routerLink="/directory" class="more end">{{ 'GENERAL.show_all' | translate }}</a>
+        </div>
+  
+        <div class="fe-icons uu" style="display:flex"> 
+          <div class="u-icon ion-text-center" style="flex:1 1 auto; padding:0 10px">
+            <div class="u" routerLink="/directory/decore" routerDirection="forward">
+              <ion-skeleton-text animated style="width: 60px;height: 60px;margin: auto;"></ion-skeleton-text>
+              <ion-skeleton-text animated class="t d-block"></ion-skeleton-text>
+            </div>
+          </div>
+  
+          <div class="u-icon ion-text-center" style="flex:1 1 auto; padding:0 10px">
+            <div class="u" routerLink="/directory/decore" routerDirection="forward">
+              <ion-skeleton-text animated style="width: 60px;height: 60px;margin: auto;"></ion-skeleton-text>
+              <ion-skeleton-text animated class="t d-block"></ion-skeleton-text>
+            </div>
+          </div>
+  
+          <div class="u-icon ion-text-center" style="flex:1 1 auto; padding:0 10px">
+            <div class="u" routerLink="/directory/decore" routerDirection="forward">
+              <ion-skeleton-text animated style="width: 60px;height: 60px;margin: auto;"></ion-skeleton-text>
+              <ion-skeleton-text animated class="t d-block"></ion-skeleton-text>
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+    </div>
+
+
+    <!-- Servises -->
+    <div class="services ion-margin-bottom" *ngIf="services.length > 0">
+      <div class="head customx d-flex f-a-c ion-margin-bottom">
+        <h2 class="title">{{ 'HOME.services' | translate }}</h2>
+        <a routerLink="/directory" class="more end">{{ 'GENERAL.show_all' | translate }}</a>
+      </div>
+
+      <ion-slides pager="true" [options]="slideOptsServ" class="fe-icons uu"> 
+        
+        <ion-slide class="u-icon ion-text-center">
+          <div class="u" routerLink="/directory/decore" routerDirection="forward">
+            <img src="assets/decore.png">
+            <span class="t d-block">{{ 'DIRECTORY.decore' | translate }}</span>
+          </div>
+        </ion-slide>
+
+        <ion-slide *ngFor="let serv of services" class="u-icon ion-text-center">
+          <div class="u" routerLink="/directory/{{ serv.id }}" routerDirection="forward">
+            <img src="{{ serv.icon }}">
+        <span class="t d-block">{{ serv.title }}</span>
+          </div>
+        </ion-slide>
+      </ion-slides>
+
+    </div>
+
+
+    <!-- notifications -->    
+    <div class="last-notifi ion-margin-bottom" *ngIf="generalLastNotifi.length > 0">
+      
+      <div class="head customx d-flex f-a-c">
+        <h2 class="title">{{ 'HOME.last_notifi' | translate }}</h2>
+        <a routerLink="/cat/ds1_notifications" class="more end">{{ 'GENERAL.show_all' | translate }}</a>
+      </div>
+
+      <div class="co" >
+        <ion-list lines="none" *ngFor="let post of generalLastNotifi" class=" {{post.post_type}}">
+          <ion-item [routerLink]="['/', 'cat', post.post_type, post.id]" routerDirection="forward">
+            <span slot="start" class="p-icons"></span>
+            <ion-label>{{post.title}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <div class="btn-group ion-text-center ion-margin">
+        <ion-button routerLink="/cat/ds1_notifications" size="small" color="secondary">{{ 'HOME.all_notifications' | translate }}</ion-button>
+        <ion-button *ngIf="userlogin" routerLink="/cat/ds1_tickets" size="small" color="secondary">{{ 'HOME.all_tickets' | translate }}</ion-button>
+      </div>
+
+    </div>
+
+    <!-- projects -->
+    <div class="last-projects ion-margin-bottom" *ngIf="projects.length > 0">
+      <div class="head customx d-flex f-a-c ion-margin-bottom">
+        <h2 class="title">{{ 'HOME.last_projects' | translate }}</h2>
+        <a routerLink="/cat/real-estate" class="more end">{{ 'GENERAL.show_all' | translate }}</a>
+      </div>
+      <div class="data-co g1">
+        <ion-card *ngFor="let post of projects" class="unit" [routerLink]="['/', 'cat','real-estate' ,post.id]">
+          <ion-card-content class="image-co">
+            <img *ngIf="post.thumbnail" [src]="post.thumbnail" class="p d-flex">
+          </ion-card-content>
+      
+          <ion-card-header class="cap ion-text-center">
+            <ion-card-title class="title" [innerHTML]="post.title" text-center></ion-card-title>
+            <ion-button size="small" expand="full" fill="clear" text-right>{{ 'GENERAL.more' | translate }}...</ion-button>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </div>
+
+
+
+    <!-- model  -->
+
+
+
+    <!-- The Modal -->
+    <div id="myModal"    class="modal fade-in-zoom" [ngClass]="{'hideModal': ShowModal}">
+    
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" (click)="CloseModal()">&times;</span>
+       <a href="{{ urlads }}"><img src="{{cover}}"> </a>
+
+      </div>
+    
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" routerDirection="backward"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'P_TITLES.p_follow_projects' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="skeleton">
+    <div class="custom-skeleton">
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%;margin-bottom: 15px;"></ion-skeleton-text>
+    </div>
+    <ion-skeleton-text animated style="height: 150px;margin-bottom: 8px;"></ion-skeleton-text>
+    <div class="d-flex">
+      <ion-thumbnail slot="start" style="width: 33%">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-thumbnail slot="start" style="margin: 0 5px;width: 33%">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-thumbnail slot="start" style="width: 33%">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+    </div>
+  </div>
+
+  <div class="projects-co" *ngIf="projects">
+    <div class="project-unit ion-margin-bottom ion-padding-bottom" *ngFor="let project of projects">
+      <div class="top-co">
+        
+        <h1 class="title">{{ project.project_title }}</h1>
+
+        <div class="more-info">
+          <span class="due_date" *ngIf="project.due_date">{{ 'GENERAL.deliveryTime' | translate }} {{ project.due_date }}</span>
+          <div class="complete_percentage" *ngIf="project.percentage">
+            <div class="prm d-flex f-a-c f-j-c" style="width:{{ project.percentage }}%">{{ project.percentage }} %</div>
+          </div>
+        </div>
+        <img src="{{ project.primary_photo[0]['medium_large'][0] }}" (click)="openImagePrev({ image: project.primary_photo[0]['medium_large'][0] } )">
+      </div>
+      <div class="u-info">
+        
+        
+        <div class="project_contentt" *ngIf="project.project_content" [innerHTML]="project.project_content | safe: 'html'">
+
+
+      </div>
+
+      </div>
+
+      <!--
+      <div class="plan-co ion-padding ion-margin-bottom" *ngIf="project.plan">
+        <img src="{{ project.plan[0] }}" alt="{{ project.project_title }}">
+      </div>
+      -->
+
+      <div class="gallery-co ion-padding-vertical" *ngIf="project.primary_photo">
+        <img *ngIf=" project.plan[0] " class="unit" src="{{ project.plan[0] }}" alt="{{ project.project_title }}" (click)="openImagePrev( {image:project.plan[0]} )">
+        <img *ngFor="let img of project.steps" src="{{ img['medium'][0] }}" alt="{{ project.project_title }}" (click)="openImagePrev({image: img['medium_large'][0]} )">
+       
+      </div>
+      <hr>
+    </div>   
+  </div>
+
+  
+
+</ion-content>

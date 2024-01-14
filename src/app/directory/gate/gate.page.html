@@ -1,0 +1,36 @@
+
+
+<ion-content>
+  <div class="page-custom-header">
+    <div class="act-btn-co">
+      <ion-buttons slot="end">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>  
+    </div>
+
+    <h1>{{ 'P_TITLES.directoryGate' | translate }}</h1>
+    <p>{{ 'DIRECTORY.desc' | translate }}</p>
+  </div>
+  <div class="co-d">
+
+    <div *ngIf="skeleton">
+      <div class="co g1">
+        <div class="unit" *ngFor="let number of skeletonNumbers">
+          <ion-skeleton-text animated style="width: 60px;height: 60px;margin: auto;"></ion-skeleton-text>
+          <ion-skeleton-text animated class="t d-block"></ion-skeleton-text>
+        </div>
+      </div>
+    </div>
+    <div class="g1" *ngIf="posts.length > 0">
+      <a class="unit ion-text-center" routerLink="/directory/decore" routerDirection="forward">
+        <img src="assets/decore.png">
+        <span class="t d-block">{{ 'DIRECTORY.decore' | translate }}</span>
+      </a>
+
+      <a *ngFor="let serv of posts" class="unit ion-text-center" routerLink="/directory/{{ serv.id }}" routerDirection="forward">
+        <img src="{{ serv.icon }}">
+        <span class="t d-block">{{ serv.title }}</span>
+      </a>
+    </div>
+  </div>
+</ion-content>

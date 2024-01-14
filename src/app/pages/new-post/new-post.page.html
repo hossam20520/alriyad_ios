@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" routerDirection="backward"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'P_TITLES.addNew' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2 class="ion-margin-bottom">{{ 'P_TITLES.'+typeToP | translate }}</h2>
+  <form [formGroup]="credentialsForm" (ngSubmit)="onSubmitUserData()" padding-right>
+
+    <ion-item class="ion-margin-bottom ion-no-padding" *ngIf="typeToP == 'ds1_tickets'">
+      <div tabindex="0"></div>
+      <ion-icon color="primary" name="barcode-outline"></ion-icon>
+      <ion-label>{{ 'NEWPOST.p_type' | translate }}</ion-label>
+      <ion-select formControlName="p_type" cancelText="{{ 'GENERAL.cancel' | translate }}" okText="{{ 'GENERAL.ok' | translate }}" value="complaint">
+        <ion-select-option *ngIf="this.GeneralService.cuVars.cUser.value !='noData'" value="general">{{ 'NEWPOST.general' | translate }}</ion-select-option>
+        <ion-select-option value="meeting">{{ 'NEWPOST.meeting' | translate }}</ion-select-option>
+        <ion-select-option *ngIf="this.GeneralService.cuVars.cUser.value !='noData'" value="redeem">{{ 'NEWPOST.redeem' | translate }}</ion-select-option>
+        <ion-select-option value="decore">{{ 'NEWPOST.decore' | translate }}</ion-select-option>
+        <ion-select-option *ngIf="this.GeneralService.cuVars.cUser.value !='noData'" value="suggestion">{{ 'NEWPOST.suggestion' | translate }}</ion-select-option>
+        <ion-select-option *ngIf="this.GeneralService.cuVars.cUser.value !='noData'" value="other">{{ 'NEWPOST.other' | translate }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="ion-margin-bottom ion-no-padding" *ngIf="this.GeneralService.cuVars.cUser.value =='noData'">
+      <div tabindex="0"></div>
+      <ion-icon color="primary" name="person-outline"></ion-icon>
+      <ion-input autofocus formControlName="name" type="text" placeholder="{{ 'NEWPOST.name' | translate }}" ></ion-input>
+    </ion-item>
+
+
+    <ion-item class="ion-margin-bottom ion-no-padding" *ngIf="this.GeneralService.cuVars.cUser.value =='noData'">
+      <div tabindex="0"></div>
+      <ion-icon color="primary" name="phone-portrait-outline"></ion-icon>
+      <ion-input autofocus formControlName="phone" type="text" placeholder="{{ 'NEWPOST.phone' | translate }}" ></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-margin-bottom ion-no-padding">
+      <div tabindex="0"></div>
+      <ion-icon color="primary" name="chatbubble-ellipses-outline"></ion-icon>
+      <ion-input autofocus formControlName="title" type="text" placeholder="{{ 'NEWPOST.post_title' | translate }}" ></ion-input>
+    </ion-item>
+
+
+    <ion-item class="ion-margin-bottom ion-no-padding">
+      <div tabindex="0"></div>
+      <ion-icon color="primary" name="mail-outline"></ion-icon>
+      <ion-textarea formControlName="post_content" placeholder="{{ 'NEWPOST.your_msg' | translate }}"></ion-textarea>
+    </ion-item>
+
+    <div padding>
+      <ion-button class="submit" type="submit" [disabled]="!credentialsForm.valid" expand="block">{{ 'GENERAL.send' | translate }}</ion-button>
+    </div>
+  </form>
+</ion-content>

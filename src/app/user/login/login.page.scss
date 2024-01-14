@@ -1,0 +1,39 @@
+
+.title {
+    margin: 0 0 30px;
+}
+
+ion-item {
+    box-shadow: 1px 3px 13px #00000021;
+    border: 1px solid black;
+    margin-bottom: 20px;
+
+    ion-icon {
+
+        color: black;
+        margin: 0 10px;
+    }
+}
+
+ion-input {
+    height: 55px;
+}
+
+ion-button.submit {
+  
+    background-color: black;
+    --border-radius: 30px;
+    --box-shadow: 0px 5px 10px var(--ion-color-primary-tint);
+}
+
+ion-button {
+  
+    text-transform: none;
+}
+
+ion-button.mbtn {
+    box-shadow: 1px 3px 13px #00000021;
+    border-radius: 30px;
+    font-size: 14px;
+    margin: 0 4px;
+}

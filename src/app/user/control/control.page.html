@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'P_TITLES.control' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item-group>
+    <ion-item-divider>
+      <ion-label>{{ 'GENERAL.settings' | translate }}</ion-label>
+    </ion-item-divider>
+  
+    <ion-item>
+      <div tabindex="0"></div>
+      <ion-label>{{ 'USER_CONTROL.change_language' | translate }}</ion-label>
+      <ion-select (ionChange)="onChangeLang($event)" cancelText="{{ 'GENERAL.cancel' | translate }}" okText="{{ 'GENERAL.ok' | translate }}" id="selectLang" name="selectLang" value="{{ currentLang }}">
+        <ion-select-option value="en">English</ion-select-option>
+        <ion-select-option value="ar">عربى</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <div tabindex="0"></div>
+      <ion-label>{{ 'USER_CONTROL.notifi_settings' | translate }}</ion-label>
+      <ion-select (ionChange)="onChangeNotifi($event)" multiple="true" cancelText="{{ 'GENERAL.cancel' | translate }}" okText="{{ 'GENERAL.ok' | translate }}" value="general">
+        <ion-select-option value="general">{{ 'USER_CONTROL.general_notifi' | translate }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-item-group>
+  
+  <ion-item-group> 
+    <ion-item-divider>
+      <ion-label>{{ 'USER_CONTROL.change_password' | translate }}</ion-label>
+    </ion-item-divider>
+
+    <form [formGroup]="credentialsForm" (ngSubmit)="onSubmitUserData()" padding-right>
+      <ion-item>
+        <div tabindex="0"></div>
+        <ion-input [type]="password_type" formControlName="password" (ionChange)="strongPassMeter($event)" placeholder="{{ 'LOGIN.password' | translate }}"></ion-input>
+        <ion-icon name="eye" item-right (click)="togglePasswordMode()"></ion-icon> 
+        <ion-button item-right type="submit" [disabled]="!credentialsForm.valid">
+        {{ 'GENERAL.change' | translate }}
+        </ion-button>
+      </ion-item>
+      <div class="pass-strong {{ passwordStrong }}" style="height:2px;background-color:{{ passwordStrong }};"></div>
+    </form>
+  </ion-item-group>
+
+  <ion-item-group>
+    <div class="d ion-margin-bottom">{{ 'USER_CONTROL.logout_info' | translate }}</div>
+    <ion-button (click)="logOut()" color="danger">
+      <ion-icon slot="start" name="log-out"></ion-icon>
+    {{ 'USER_CONTROL.logout' | translate }}
+    </ion-button>
+  </ion-item-group>
+
+  
+
+  
+
+
+  
+
+
+
+</ion-content>

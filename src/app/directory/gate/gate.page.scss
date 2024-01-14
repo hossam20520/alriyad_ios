@@ -1,0 +1,48 @@
+.page-custom-header {
+    background: #3e9d4f url(/assets/bg-patt.jpg);
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 50px 20px 55px;
+}
+.act-btn-co {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 100%;
+}
+ion-menu-button {
+    margin-inline: 11px;
+}
+.co-d {
+    padding-inline: 25px;
+}
+.g1 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0px;
+
+    margin-top: -45px;
+    background: #fff;
+    box-shadow: 0 3px 15px #4848483b;
+    border-radius: 10px;
+
+    .unit {
+        padding: 30px 15px;
+        border-top: 1px solid #e5e5e5;
+        border-left: 1px solid #e5e5e5;
+        line-height: 1.2;
+
+        &:nth-child(-n+2) {
+            border-top: none;
+        }
+        &:nth-child(odd) {
+            border-left: none;
+        }
+
+        img {
+            max-width: 45px;
+            margin-bottom: 10px;
+        }
+    }
+}

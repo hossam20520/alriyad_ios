@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="points" routerDirection="backward"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'P_TITLES.friendInfo' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  
+  <div class="form-to-i ion-margin-vertical">
+
+    <form [formGroup]="credentialsForm" (ngSubmit)="onSubmitFriendData()">
+      <ion-grid>
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12" class="">
+            <div>
+  
+              <ion-item class="ion-margin-bottom ion-no-padding">
+                <ion-icon color="primary" name="person-outline"></ion-icon>
+                <ion-input formControlName="name" type="text" placeholder="{{ 'POINTS.name' | translate }}" ></ion-input>
+              </ion-item>
+              <div class="msg-co ion-margin-bottom" *ngIf="formMsgs.name">{{formMsgs.name}}</div>
+  
+              <ion-item class="ion-margin-bottom ion-no-padding">
+                <ion-icon color="primary" name="phone-portrait-outline"></ion-icon>
+                <ion-input formControlName="phone" type="text" placeholder="{{ 'POINTS.phone' | translate }}" ></ion-input>
+              </ion-item>
+              <div class="msg-co ion-margin-bottom" *ngIf="formMsgs.phone">{{formMsgs.phone}}</div>
+  
+              <ion-item class="ion-margin-bottom ion-no-padding">
+                <ion-icon color="primary" name="create-outline"></ion-icon>
+                <ion-textarea formControlName="message" placeholder="{{ 'POINTS.message' | translate }}"></ion-textarea>
+              </ion-item>
+              <div class="msg-co ion-margin-bottom" *ngIf="formMsgs.message">{{formMsgs.message}}</div>
+
+            </div>
+            <div class="msg-co general ion-padding ion-margin-bottom" *ngIf="formMsgs.general">{{formMsgs.general}}</div>
+
+            <div padding>
+              <ion-button class="submit" type="submit" [disabled]="!credentialsForm.valid" expand="block">{{ 'GENERAL.send' | translate }}</ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>

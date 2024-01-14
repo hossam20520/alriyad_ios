@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="cs-re/financial-gate" routerDirection="backward"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'P_TITLES.financial' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+<!-- Skeleton screen -->
+  <div *ngIf="skeleton">
+    <div class="custom-skeleton">
+      <ion-skeleton-text animated style="height: 35px;margin: 1px;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="height: 35px;margin: 1px;opacity: 0.65;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="height: 35px;margin: 1px;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="height: 35px;margin: 1px;opacity: 0.65;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="height: 35px;margin: 1px;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="height: 35px;margin: 1px;opacity: 0.65;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="height: 35px;margin: 1px;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="height: 35px;margin: 1px;opacity: 0.65;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="height: 35px;margin: 1px;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="height: 35px;margin: 1px;opacity: 0.65;"></ion-skeleton-text>
+      <ion-skeleton-text animated style="height: 35px;margin: 1px;"></ion-skeleton-text>
+    </div>
+  </div>
+	  
+  <ion-grid *ngIf="financial" class="account-table">
+    <ion-row *ngFor="let ppp of financial" class="row-w-gr {{ppp.status}}">
+      <ion-col class="d-flex" size="7">
+        <div class="icon-co">
+          <ion-icon name="{{ppp.satusIcon}}"></ion-icon>
+        </div>
+        <div>
+          <span class="t d-block">{{ppp.title}}</span>
+          <span class="price">{{ppp.value}} {{ 'GENERAL.EGP' | translate }}</span>
+        </div>
+      </ion-col>
+      <ion-col class="d-flex date" size="5">
+        <div>
+          {{ppp.date}}
+        </div>
+        <ion-button routerLink="/cs-re/financial-gate/pay" class="more end" size="small">{{ 'FINANCIAL.pay' | translate }}</ion-button>
+      </ion-col>
+    
+    </ion-row>
+  </ion-grid>
+
+
+  <!--<div class="general-info ion-margin-bottom ion-padding-vertical">
+		<div class="c100 total" *ngIf="total">
+      <ion-icon name="cash"></ion-icon>
+      {{ 'FINANCIAL.total' | translate }} :
+			<span>{{total}} {{ 'GENERAL.EGP' | translate }}</span>
+		</div>
+
+		<div class="c100 total_paid " *ngIf="total_paid">
+				<ion-icon name="cash"></ion-icon>
+      {{ 'FINANCIAL.total_paid' | translate }} :
+			<span>{{total_paid}} {{ 'GENERAL.EGP' | translate }} ( {{total_paid_pr}}% )</span>
+		</div>
+
+    <div class="c100 next-p" *ngIf="nextInstallment">
+      <ion-icon name="calendar"></ion-icon> 
+      {{ 'FINANCIAL.next_installment' | translate }}: {{nextInstallment}}
+    </div>
+		
+  </div>-->
+
+  <div class="actions">
+
+  </div>
+  
+</ion-content>

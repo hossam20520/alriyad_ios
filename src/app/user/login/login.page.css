@@ -1,0 +1,35 @@
+.title {
+  margin: 0 0 30px;
+}
+
+ion-item {
+  -webkit-box-shadow: 1px 3px 13px #00000021;
+          box-shadow: 1px 3px 13px #00000021;
+  border-radius: 30px;
+  margin-bottom: 20px;
+}
+ion-item ion-icon {
+  margin: 0 10px;
+}
+
+ion-input {
+  height: 55px;
+}
+
+ion-button.submit {
+  --border-radius: 30px;
+  --box-shadow: 0px 5px 10px var(--ion-color-primary-tint);
+}
+
+ion-button {
+  text-transform: none;
+}
+
+ion-button.mbtn {
+  -webkit-box-shadow: 1px 3px 13px #00000021;
+          box-shadow: 1px 3px 13px #00000021;
+  border-radius: 30px;
+  font-size: 14px;
+  margin: 0 4px;
+}
+/*# sourceMappingURL=login.page.css.map */

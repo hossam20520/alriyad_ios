@@ -1,0 +1,55 @@
+<ion-content class="ion-padding">
+
+  <div class="top-co">
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="directory" routerDirection="backward"></ion-back-button>
+    </ion-buttons>
+    <img *ngIf="!post || ! post.cover" src="assets/covers/dir-g.jpg">
+    <img *ngIf="post && post.cover" [src]="post.cover">
+  </div>
+
+  <h2 *ngIf="post && post.title">{{ post?.title }}</h2>
+
+  <p class="g-msg">{{ 'DIRECTORY.singleGeneralInfo' | translate }}</p>
+
+  <div *ngIf="skeleton">
+    <div class="ion-padding custom-skeleton">
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+  </div>
+
+  <div *ngIf="post && post.content" [innerHTML]="post.content | safe: 'html'" class="p-content"></div>
+
+  <div class="av-in" *ngIf="post && post.available_in.length > 0">
+    <h3 class="se-title">{{ 'DIRECTORY.singleAvIn' | translate }}</h3>
+    <ul>
+      <li *ngFor="let itemX of post.available_in">{{itemX.name}}</li>
+    </ul>
+  </div>
+
+  <ion-list *ngIf="post && post.directory_units" class="di-co">
+
+    <ion-item *ngFor="let itemX of post.directory_units">
+      <ion-icon src="assets/icon/focus1.svg" slot="start"></ion-icon>
+      <ion-label>
+        <h2>{{ itemX.name }}</h2>
+        <p *ngIf="itemX.phones && itemX.phones.length > 0" class="phones">
+          <a *ngFor="let phone of itemX.phones" href="tel:{{ phone.phone }}">{{ phone.phone }}</a>
+        </p>
+        <p *ngIf="itemX.locations && itemX.locations.length > 0" class="locations">
+          <span *ngFor="let location of itemX.locations">{{ location.name }}</span>
+        </p>
+        <p *ngIf="itemX.address" class="address">{{itemX.address}}</p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

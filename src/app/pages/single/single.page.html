@@ -1,0 +1,209 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="cat/{{typeToP}}" routerDirection="backward"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="post && post.title">{{ post?.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <div *ngIf="skeleton">
+    <div class="ion-padding custom-skeleton">
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+  </div>
+
+  <div *ngIf="post">
+    <div class="img-co">
+      <img *ngIf="post.cover" [src]="post.cover" [style.width]="'100%'">
+      <img *ngIf="post.p_state == 'sold-end'" src="assets/sold.png" class="sold-ba">      
+    </div>
+
+
+    <div class="f-more-data d-flex f-a-c">
+      <div class="date uu" *ngIf="post.date && !post?.dontShowDate"> 
+        <ion-icon name="calendar"></ion-icon> {{post?.date}}
+      </div>
+
+      <div class="locations uu" *ngIf="typeToP == 'real-estate' && post?.locations"> 
+        <div href="#" *ngFor="let term of post?.locations" class="u-term t-{{ term.term_id }}">
+          <ion-icon class="icon" name="location-outline"></ion-icon>
+          <span class="t">{{ term.name }}</span>
+        </div>
+      </div>
+      <div class="types uu" *ngIf="typeToP == 'real-estate' && post?.types"> 
+        <div href="#" *ngFor="let term of post?.types" class="u-term t-{{ term.term_id }}">
+          <ion-icon class="icon" name="business-outline"></ion-icon>
+          <span class="t">{{ term.name }}</span>
+        </div>
+      </div>
+      
+      <ion-button size="small" class="pdf uu" *ngIf="post?.pdf" href="{{ post?.pdf.url }}"> 
+          <ion-icon class="icon" name="download-outline"></ion-icon>
+          <span class="t">{{ 'REALESTATE.pdf' | translate }}</span>
+      </ion-button>
+      
+    </div>
+    <h1 class="p-title" *ngIf="post.title">{{ post.title }}</h1>
+
+    <div class="more-info d-flex f-a-c ion-margin-bottom">
+      <div class="p-type uu d-flex f-a-c" *ngIf="post?.p_type"> 
+        <ion-icon name="bookmark-outline"></ion-icon> {{ 'NEWPOST.'+post.p_type | translate }}
+      </div>
+      <div class="status uu d-flex f-a-c ion-padding-horizontal" *ngIf="post?.status"> 
+        <span class="v d-flex f-a-c {{post.status}}">
+          <ion-icon name="bookmarks-outline"></ion-icon> {{ 'GENERAL.'+ post.status | translate }}
+        </span>
+      </div>
+    </div>
+
+
+    <div *ngIf="post.content" [innerHTML]="post.content | safe: 'html'" class="p-content ion-padding-vertical"></div>
+    <!--<div href="#" class="show-more-content" (click)="showMoreContent('maincontent')">{{ 'GENERAL.show' | translate }}</div>-->
+    
+
+
+
+
+    <ion-slides pager="true" [options]="slideOpts" class="fe-icons uu" *ngIf="typeToP == 'real-estate' && post?.more_options_prop"> 
+        
+        <ion-slide class="u-icon" *ngFor="let serv of post?.more_options_prop; let i=index">
+          <div class="u ion-text-center">
+            <ion-icon class="icon d-block" src="assets/icon/re/{{ serv }}.svg"></ion-icon>
+            <span class="t d-block">{{ 'REALESTATE.'+serv | translate }}</span>
+          </div>
+        </ion-slide>
+    </ion-slides>
+
+    
+    <div class="units uu ion-padding-vertical" *ngIf="typeToP == 'real-estate' && post.p_state !== 'sold-end'"> 
+      <div class="se-title-co">
+        <h2 class="se-title ion-text-center">{{ 'REALESTATE.units' | translate }}</h2>
+      </div>
+      <div class="units ug g1 d-flex ion-padding-vertical" *ngIf="post?.units_type == 'normal' && post?.units_info_prop"> 
+
+        <ion-card *ngFor="let unit of post?.units_info_prop; let i=index" (click)="openImagePrev({image:unit.unit_pic_prop.url})" class="{{ unit.state_prop }}">
+          <ion-card-content>
+            <img *ngIf="unit.state_prop == 'sold-end'" src="assets/sold.png" class="sold-ba">
+            <img *ngIf="unit.unit_pic_prop.url" src="{{unit.unit_pic_prop.sizes.medium}}" class="p">
+          </ion-card-content>
+      
+          <ion-card-header class="ion-text-center">
+            <ion-card-title>{{ 'REALESTATE.'+unit.property_type_prop | translate }} {{unit.space_prop}} {{ 'REALESTATE.m' | translate }}</ion-card-title>
+            <ion-card-subtitle>{{unit.unit_title_prop}}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+
+      </div>
+    </div>
+
+    
+    <div class="FollowProject ion-padding-vertical" *ngIf="FollowProject"> 
+      
+      <div class="se-title-co ion-text-center">
+        <h2 class="se-title ion-text-center">{{ 'REALESTATE.FollowProject' | translate }}</h2>
+        <span class="due_date" *ngIf="FollowProject.due_date">{{ 'GENERAL.deliveryTime' | translate }} {{ FollowProject.due_date }}</span>
+        <div class="complete_percentage" *ngIf="FollowProject.percentage > 0">
+          <div class="prm d-flex f-a-c f-j-c" style="{{ 'width:'+FollowProject.percentage +'%'}}">{{ FollowProject.percentage }} %</div>
+        </div>
+      </div>
+      <div *ngIf="FollowProject.content" [innerHTML]="FollowProject.content | safe: 'html'" class="p-content ion-padding-vertical"></div>
+    </div>
+
+
+    <div *ngIf="videoList && videoList.length > 0" class="ion-margin-bottom video-list g1 vid-l-{{videoList.length}}">
+      <div class="se-title-co">
+        <h2 class="se-title ion-text-center">{{ 'REALESTATE.video' | translate }}</h2>
+      </div>
+      <ion-card *ngFor="let vvv of videoList" (click)="openVideo(vvv.id)">
+        <ion-card-content>
+          <img [src]="'https://img.youtube.com/vi/'+ vvv.id +'/mqdefault.jpg'" class="p">
+        </ion-card-content>
+      
+        <ion-card-header>
+          <ion-card-title *ngIf="vvv.title" text-center>{{ vvv.title }}</ion-card-title>
+          <ion-button expand="full" fill="clear" size="small" text-right>{{ 'GENERAL.play_video' | translate }}</ion-button>
+        </ion-card-header>
+  
+      </ion-card>
+    </div>
+
+
+    <div class="map-se ion-margin-bottom" *ngIf="post.map_prop">
+      <div class="se-title-co">
+        <h2 class="se-title ion-text-center">{{ 'GENERAL.onMap' | translate }}</h2>
+      </div>
+
+        <img (click)="openExtMapsLink(post.map_prop)" src="assets/on-map.jpg" alt="Location">
+    </div>
+    
+    
+    <div class="comments">
+      <div class="new-comments ion-padding-top ion-margin-top" *ngIf="post?.new_comments">
+        <h3 class="title">{{ 'GENERAL.add_comment' | translate }}</h3>
+        
+        <div class="f-co">
+          <form #form="ngForm" [formGroup]="credentialsForm" (ngSubmit)="onSubmitData()">
+          <ion-grid class="ion-margin-bottom">
+            <ion-row color="primary">
+            <ion-col>
+              <div>
+              <ion-item>
+                <ion-textarea formControlName="comment" clearOnEdit="true" placeholder="{{ 'NEWPOST.your_msg' | translate }} *"></ion-textarea>
+              </ion-item>
+              </div>
+              <div>
+              <ion-button size="medium" type="submit" [disabled]="!credentialsForm.valid" expand="block">{{ 'GENERAL.send' | translate }}</ion-button>
+              </div>
+            </ion-col>
+            </ion-row>
+          </ion-grid>
+          </form>
+        </div>
+      </div>
+
+      <div class="cu-comments ion-padding-vertical" *ngIf="comments && comments.length > 0">
+        <h3 class="title">{{ 'GENERAL.comments' | translate }}</h3>
+        <div class="unit d-flex" *ngFor="let comment of comments; let i=index">
+          <div class="c-img">
+            <img src="assets/{{comment.comment_auth == 'current' || this.GeneralService.cuVars.cUser.value.email ===  comment.comment_author_email ? 'comment-customer' : 'comment-support'}}.svg">
+          </div>
+          <div class="data">
+            <div class="date">{{comment.comment_date}}</div>
+            <div class="content" *ngIf="comment.comment_content" [innerHTML]="comment.comment_content | safe: 'html'"></div>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+
+  <ion-fab *ngIf="typeToP == 'real-estate'" slot="fixed" vertical="bottom" horizontal="right" class="d-flex">
+    <ion-fab-button class="hotline" >
+      <a href="tel:19022">
+        <span class="number">19022</span>
+        <ion-icon name="call-outline"></ion-icon>
+      </a>
+    </ion-fab-button>
+
+    <ion-fab-button class="book"  (click)="pushToNextScreenWithParams('/new-post/ds1_tickets', 'meeting')">
+        <span class="number">{{ 'GENERAL.book' | translate }}</span>
+        <ion-icon name="bookmarks-outline"></ion-icon>
+    </ion-fab-button>
+
+  </ion-fab>
+</ion-content>

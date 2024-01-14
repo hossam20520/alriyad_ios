@@ -1,0 +1,14 @@
+ion-content, ion-modal {
+    --background:transparent;
+}
+
+ion-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #0000007a;
+}
+
+ion-slides {
+    height: 100%;
+}

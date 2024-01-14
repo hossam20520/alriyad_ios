@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="cs-re/financial-gate" routerDirection="backward"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'P_TITLES.forwardInstallments' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <p>{{ 'FINANCIAL.forwardInstallmentsInfo' | translate }}</p>
+
+  <form [formGroup]="credentialsForm" (ngSubmit)="onSubmitUserData()">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center ion-padding-vertical>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12" class="ion-padding-horizontal">
+            <ion-item class="ion-margin-bottom ion-no-padding">
+              <ion-icon color="primary" name="calendar-outline"></ion-icon>
+              <ion-datetime formControlName="colectDate" displayFormat="DD-MM-YYYY" min="{{colectDateMin}}" max="{{colectDateMax}}" placeholder="{{ 'FINANCIAL.colectDate' | translate }}"></ion-datetime>
+            </ion-item>
+
+            <ion-skeleton-text *ngIf="skeleton" animated style="height: 45px;margin-bottom: 15px;border-radius: 50px;"></ion-skeleton-text>
+
+            <ion-item class="ion-margin-bottom ion-no-padding" *ngIf="financial.length > 0">
+              <ion-icon color="primary" name="calculator-outline"></ion-icon>
+              <ion-select  formControlName="installments" multiple="true" okText="{{ 'GENERAL.ok' | translate }}" cancelText="{{ 'GENERAL.cancel' | translate }}" placeholder="{{ 'FINANCIAL.installments' | translate }}">
+                <ion-select-option *ngFor="let insta of financial">{{insta.title + ' ' + insta.date}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          <div padding>
+            <ion-button class="submit" type="submit" [disabled]="!credentialsForm.valid" expand="block">{{ 'GENERAL.send' | translate }}</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

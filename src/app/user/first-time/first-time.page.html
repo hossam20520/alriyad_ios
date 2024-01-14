@@ -1,0 +1,36 @@
+<ion-content>
+	<img src="assets/patt-dots.png" class="patt-bg">
+  <div *ngIf="!didInit">
+    <div class="img-co" style="background-image: url(assets/first/1.jpg);"></div>
+     <h4 class="ion-padding">{{ 'FIRST_TIME.s1_title' | translate }}</h4>
+ </div>
+	<ion-slides pager="true" [options]="slideOptsOne" *ngIf="didInit" style="direction: {{cLang}};" #slideWithNav>
+		   <ion-slide>
+         <div class="img-co" style="background-image: url(assets/first/1.jpg);"></div>
+          <h4 class="ion-padding">{{ 'FIRST_TIME.s1_title' | translate }}</h4>
+			</ion-slide>
+		   <ion-slide>
+        <div class="img-co" style="background-image: url(assets/first/2.jpg);"></div>
+        <h4 class="ion-padding">{{ 'FIRST_TIME.s2_title' | translate }}</h4>
+			</ion-slide>
+		   <ion-slide>
+        <div class="img-co" style="background-image: url(assets/first/3.jpg);"></div>
+        <h4 class="ion-padding">{{ 'FIRST_TIME.s3_title' | translate }}</h4>
+      </ion-slide>
+      
+      <ion-slide class="start-s">
+        <h2>{{ 'FIRST_TIME.ready_start' | translate }}</h2>
+        <ion-button fill="clear" (click)="myBackButton()">{{ 'FIRST_TIME.continue' | translate }} <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+			</ion-slide>
+	</ion-slides>
+  
+  <div class="bar-ac ion-text-uppercase">
+    <a color="light" (click)="myBackButton()">
+      {{ 'FIRST_TIME.skip' | translate }}
+    </a>
+    <a class="next" (click)="swipeNext()"><ion-icon name="chevron-forward-outline"></ion-icon></a>
+  </div>
+
+	 
+</ion-content>
+

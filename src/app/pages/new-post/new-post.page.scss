@@ -1,0 +1,14 @@
+ion-icon {
+    margin-right: 10px;
+}
+
+ion-textarea {
+    height: 100px;
+}
+
+[dir="rtl"] :host {
+    ion-icon {
+        margin-right: 0;
+        margin-left: 10px;
+    }
+}

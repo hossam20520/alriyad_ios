@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Al Riyadh Misr</string>
+    <string name="title_activity_main">Al Riyadh Misr</string>
+    <string name="package_name">eg.com.alriyadhmisr.ds1csre</string>
+    <string name="custom_url_scheme">eg.com.alriyadhmisr.ds1csre</string>
+    <string name="activity_name">eg.com.alriyadhmisr.ds1csre</string>
+</resources>

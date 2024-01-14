@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-button slot="end" size="small" (click)="startSendData()" margin> <ion-icon name="add"></ion-icon> {{ 'GENERAL.add' | translate }} {{selectedFriends.length ?'('+selectedFriends.length+')' : ''}}</ion-button>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="points" routerDirection="backward"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'P_TITLES.pointsAdd' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar primary show-cancel="true" placeholder="Search" (ionChange)="onSearchTerm($event)"></ion-searchbar>
+
+  <div *ngIf="skeleton">
+    <ion-list>
+      <ion-item *ngFor="let number of skeletonNumbers">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-thumbnail>
+        <ion-label>
+          <h3><ion-skeleton-text animated style="width: 50%"></ion-skeleton-text></h3>
+          <p><ion-skeleton-text animated style="width: 80%"></ion-skeleton-text></p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div class="dat-group" *ngIf="contactsFound">
+    <ion-item-sliding *ngFor="let contact of contactsFound">
+      <ion-item [hidden]="contact.hide">
+        <ion-label>
+        <span class="name">{{contact.displayName}}</span>
+        <p class="phone" *ngIf="contact?.phoneNumbers">
+          <span *ngFor="let obj of contact?.phoneNumbers">{{obj.value | json}}</span>
+        </p>
+        </ion-label>
+        <ion-checkbox ng-init="ddddd='sdfsdf'" (ionChange)="selectFriend($event, contact)"></ion-checkbox>
+      </ion-item>
+    
+    </ion-item-sliding>
+  </div>
+</ion-content>

@@ -1,0 +1,23 @@
+<ion-content>
+  <ion-slides [options]="slideOpts">
+    <ion-slide>
+      <div class="swipr-zoom-container">
+        <img *ngIf="prevData.image" src="{{prevData.image}}" alt="popup image">
+      </div>
+    </ion-slide>
+  </ion-slides>
+
+  <!-- Footer without a border -->
+<ion-footer class="ion-no-border">
+  <ion-row class="f-j-c">
+    <ion-col size="4" class="ion-text-center">
+      <ion-button (click)="close()" size="small" fill="clear" color="light">
+        <ion-icon name="close" slot="start"></ion-icon>
+        Close
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
+
+
+</ion-content>

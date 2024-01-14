@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" routerDirection="backward"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'P_TITLES.financialGate' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-list lines="none" class="ion-padding-vertical ">
+    <ion-item class="row-w-gr" routerLink-ddd="/cs-re/financial-gate/account-statement" routerDirection="forward">
+      <ion-icon slot="start" color="medium" src="assets/icon/report.svg"></ion-icon>
+      <ion-label>{{ 'FINANCIAL.accountStatement' | translate }}</ion-label>
+      <ion-icon slot="end" color="medium" name="lock-closed-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item class="row-w-gr" routerLink-ddd="/cs-re/financial-gate/forward-installments" routerDirection="forward">
+      <ion-icon slot="start" color="medium" src="assets/icon/wallet.svg"></ion-icon>
+      <ion-label>{{ 'FINANCIAL.forwardInstallments' | translate }}</ion-label>
+      <ion-icon slot="end" color="medium" name="lock-closed-outline"></ion-icon>
+    </ion-item>
+    
+    <ion-item class="row-w-gr" routerLink-ddd="/cs-re/financial-gate/financial" routerDirection="forward">
+      <ion-icon slot="start" color="medium" src="assets/icon/money.svg"></ion-icon>
+      <ion-label>{{ 'FINANCIAL.financial' | translate }}</ion-label>
+      <ion-icon slot="end" color="medium" name="lock-closed-outline"></ion-icon>
+    </ion-item>
+    
+  </ion-list>
+</ion-content>
